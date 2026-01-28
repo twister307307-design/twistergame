@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWISTER - Chaîne YouTube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Fond animé avec particules */
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
+            z-index: -1;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Particules flottantes */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(100px, -100px) rotate(120deg); }
+            66% { transform: translate(-50px, 50px) rotate(240deg); }
+        }
+
+        /* Header avec effet 3D */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .logo-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #a78bfa, #ff6b6b);
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite, float3D 4s ease-in-out infinite;
+            text-shadow: 0 0 80px rgba(255,255,255,0.3);
+            filter: drop-shadow(0 10px 30px rgba(167, 139, 250, 0.5));
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float3D {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-30px) rotateX(5deg); }
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.3) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .tagline {
+            font-size: 1.8em;
+            margin-top: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 0.9; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Stats cards avec effet glassmorphism */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.4);
+            border-color: rgba(167, 139, 250, 0.5);
+        }
+
+        .stat-card:hover .stat-details {
+            max-height: 300px;
+            margin-top: 20px;
+            opacity: 1;
+        }
+
+        .stat-card.active {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: rgba(167, 139, 250, 0.8);
+        }
+
+        .stat-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, margin-top 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .stat-details p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 10px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd93d, #ff6b6b, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: numberGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes numberGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 217, 61, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8)); }
+        }
+
+        .stat-label {
+            font-size: 1.3em;
+            margin-top: 15px;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* Video section modernisée */
+        .video-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px;
+            margin: 60px 0;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #a78bfa);
+            background-size: 200% 100%;
+            animation: borderSlide 3s linear infinite;
+        }
+
+        @keyframes borderSlide {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* CTA Button avec effet néon */
+        .cta-button {
+            display: inline-block;
+            padding: 25px 60px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.4s ease;
+            border-radius: 50px;
+        }
+
+        .cta-button:hover::before {
+            width: 100%;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Content cards avec effet 3D */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(78, 205, 196, 0.1));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .content-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.2), rgba(167, 139, 250, 0.2));
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .content-card:hover::after {
+            opacity: 1;
+        }
+
+        .content-card:hover {
+            transform: translateY(-20px) rotateX(5deg);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 30px 80px rgba(167, 139, 250, 0.4);
+        }
+
+        .content-card h3 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd93d, #ff6b6b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Modal ultra moderne */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.98), rgba(15, 20, 40, 0.98));
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideInModal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes slideInModal {
+            from {
+                transform: scale(0.8) translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5em;
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid rgba(255, 107, 107, 0.5);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 107, 107, 0.8);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+        }
+
+        .modal h2 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #ffd93d, #ff6b6b, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .modal-detail {
+            background: rgba(167, 139, 250, 0.1);
+            border-left: 4px solid #a78bfa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-detail::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, #a78bfa, #ff6b6b);
+            animation: slideDown 2s ease-in-out infinite;
+        }
+
+        @keyframes slideDown {
+            0%, 100% { transform: translateY(-100%); }
+            50% { transform: translateY(100%); }
+        }
+
+        .modal-detail:hover {
+            background: rgba(167, 139, 250, 0.2);
+            transform: translateX(15px);
+            box-shadow: -5px 5px 20px rgba(167, 139, 250, 0.3);
+        }
+
+        .modal-detail h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffd93d;
+        }
+
+        /* Discord section avec style Discord */
+        .discord-section {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(114, 137, 218, 0.2));
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px;
+            margin: 60px 0;
+            text-align: center;
+            border: 2px solid rgba(88, 101, 242, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-section::before {
+            content: '💬';
+            position: absolute;
+            font-size: 20em;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .discord-button {
+            display: inline-block;
+            padding: 25px 60px;
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(88, 101, 242, 0.4);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.4s ease;
+            border-radius: 50px;
+        }
+
+        .discord-button:hover::before {
+            width: 100%;
+        }
+
+        .discord-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 50px rgba(88, 101, 242, 0.6);
+        }
+
+        /* Quiz section stylisée */
+        #quiz-section {
+            position: relative;
+        }
+
+        #quiz-section::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #a78bfa, #ff6b6b);
+            background-size: 400% 400%;
+            border-radius: 35px;
+            z-index: -1;
+            animation: ledRotate 4s linear infinite;
+        }
+
+        @keyframes ledRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        .game-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .game-btn {
+            padding: 30px;
+            background: rgba(167, 139, 250, 0.1);
+            border: 3px solid rgba(167, 139, 250, 0.3);
+            border-radius: 20px;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .game-btn:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .game-btn:hover {
+            background: rgba(167, 139, 250, 0.3);
+            transform: scale(1.05) translateY(-5px);
+            border-color: rgba(167, 139, 250, 0.7);
+            box-shadow: 0 15px 40px rgba(167, 139, 250, 0.4);
+        }
+
+        .game-btn.selected {
+            background: rgba(107, 203, 127, 0.3);
+            border-color: #6bcf7f;
+            box-shadow: 0 0 30px rgba(107, 203, 127, 0.6);
+        }
+
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        .game-btn:hover .game-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 8px 20px rgba(167, 139, 250, 0.6));
+        }
+
+        .game-name {
+            position: relative;
+            z-index: 1;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .answer-btn {
+            padding: 25px;
+            background: rgba(167, 139, 250, 0.1);
+            border: 2px solid rgba(167, 139, 250, 0.3);
+            border-radius: 15px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .answer-btn:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .answer-btn:hover {
+            background: rgba(167, 139, 250, 0.2);
+            transform: scale(1.05);
+            border-color: rgba(167, 139, 250, 0.6);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+        }
+
+        .answer-btn.correct {
+            background: rgba(107, 203, 127, 0.3);
+            border-color: #6bcf7f;
+            animation: correctPulse 0.6s ease;
+            box-shadow: 0 0 30px rgba(107, 203, 127, 0.6);
+        }
+
+        .answer-btn.incorrect {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #ff6b6b;
+            animation: shake 0.6s ease;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6);
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
+        }
+
+        /* Footer moderne */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .social-links {
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.4em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: #ffd93d;
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 20px rgba(255, 217, 61, 0.8);
+        }
+
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #a78bfa, #ff6b6b);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff6b6b, #ffd93d);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 3em; }
+            .tagline { font-size: 1.2em; }
+            .stat-number { font-size: 2.5em; }
+            .content-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="stars" id="stars"></div>
+    <div id="particles"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <div class="logo">TWISTER</div>
+        </div>
+        <div class="tagline">🌪️ Là où le contenu prend vie 🌪️</div>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">CRÉATIVITÉ</div>
+                <div id="creativity" class="stat-details">
+                    <p>🎨 Des idées infinies qui ne s'arrêtent jamais !</p>
+                    <p>✨ Chaque vidéo est unique et pensée avec originalité</p>
+                    <p>🌟 L'imagination est la seule limite ici !</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">PASSION</div>
+                <div id="passion" class="stat-details">
+                    <p>❤️ Tout ce que je fais vient du cœur !</p>
+                    <p>🔥 Une énergie débordante dans chaque projet</p>
+                    <p>💪 Investissement total pour vous offrir le meilleur !</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">DÉTERMINATION</div>
+                <div id="determination" class="stat-details">
+                    <p>⚡ Toujours actif, toujours motivé !</p>
+                    <p>🎯 Des objectifs clairs et la volonté de les atteindre</p>
+                    <p>🚀 Rien ne peut arrêter cette machine à contenu !</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2 style="font-size: 3em; margin-bottom: 25px; text-align: center; background: linear-gradient(45deg, #ff6b6b, #ffd93d); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎬 Bienvenue sur ma chaîne !</h2>
+            <p style="font-size: 1.4em; text-align: center; line-height: 2; opacity: 0.9;">
+                Rejoins l'aventure TWISTER ! Ici, c'est un tourbillon de contenu unique, 
+                de moments épiques et de vibes incroyables. Chaque vidéo est une nouvelle expérience !
+            </p>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://www.youtube.com/@twister-y7h" target="_blank" class="cta-button">
+                    <span style="position: relative; z-index: 1;">▶️ ABONNE-TOI MAINTENANT</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card" onclick="openModal('gaming')">
+                <span class="content-icon">🎮</span>
+                <h3>Gaming</h3>
+                <p style="font-size: 1.1em; line-height: 1.8;">Des gameplay intenses, des moments drôles et des victoires épiques ! Découvre mes sessions de jeu et rejoins la team.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+            </div>
+            <div class="content-card" onclick="openModal('creativity')">
+                <span class="content-icon">🎨</span>
+                <h3>Créativité</h3>
+                <p style="font-size: 1.1em; line-height: 1.8;">Du contenu original et créatif qui sort de l'ordinaire. Chaque vidéo est une aventure unique !</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+            </div>
+            <div class="content-card" onclick="openModal('community')">
+                <span class="content-icon">🔥</span>
+                <h3>Communauté</h3>
+                <p style="font-size: 1.1em; line-height: 1.8;">Une communauté de passionnés qui partage les mêmes vibes. Ensemble, on crée quelque chose d'incroyable !</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="modal-gaming" class="modal" onclick="closeModalOnBackground(event, 'modal-gaming')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal('modal-gaming')">×</button>
+                <h2>🎮 Gaming</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Plonge dans l'univers gaming de TWISTER !</p>
+                
+                <div class="modal-detail">
+                    <h4>🔥 Gameplay Intense</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des parties explosives sur les jeux les plus populaires : Fortnite, Minecraft, Valorant, GTA et bien d'autres ! Chaque session est un nouveau défi à relever.</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>😂 Moments Epic Fails</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Parce que tout ne se passe pas toujours comme prévu ! Des moments de rage, de rire et de fun absolu qui rendent chaque vidéo unique et authentique.</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>🏆 Défis & Challenges</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des challenges impossibles, des speedruns, des défis communautaires... Toujours à repousser les limites pour te proposer du contenu inédit !</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>👥 Collaborations</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des parties avec d'autres créateurs, des tournois, des événements spéciaux. L'union fait la force et le divertissement !</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-creativity" class="modal" onclick="closeModalOnBackground(event, 'modal-creativity')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal('modal-creativity')">×</button>
+                <h2>🎨 Créativité</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Découvre l'univers créatif de TWISTER !</p>
+                
+                <div class="modal-detail">
+                    <h4>✨ Montages Épiques</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des montages travaillés avec des effets visuels de ouf, des transitions fluides et une ambiance unique. Chaque vidéo est une œuvre d'art en soi !</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>💡 Concepts Originaux</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des idées qui sortent de nulle part ! Des formats que tu ne verras pas ailleurs, des expérimentations folles qui repoussent les limites de la créativité.</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>🎬 Production de Qualité</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Du matériel pro, un son au top, des visuels soignés. Chaque détail compte pour t'offrir la meilleure expérience possible.</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>🌟 Touche Personnelle</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Un style unique qui définit TWISTER. Une identité visuelle reconnaissable, une atmosphère spéciale qui te transporte à chaque vidéo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-community" class="modal" onclick="closeModalOnBackground(event, 'modal-community')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal('modal-community')">×</button>
+                <h2>🔥 Communauté</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Rejoins la team TWISTER !</p>
+                
+                <div class="modal-detail">
+                    <h4>💜 Une Vraie Famille</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Plus qu'une simple communauté, c'est une famille de passionnés qui partagent les mêmes vibes. Ici, tout le monde est le bienvenu !</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>💬 Discord Actif</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Un serveur Discord animé où on se retrouve pour discuter, jouer ensemble et partager nos meilleures moments. Des salons pour tout le monde !</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>🎉 Événements Spéciaux</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Des lives exclusifs, des tournois communautaires, des give-aways et plein d'autres surprises réservées aux abonnés !</p>
+                </div>
+                
+                <div class="modal-detail">
+                    <h4>📢 Ta Voix Compte</h4>
+                    <p style="font-size: 1.1em; line-height: 1.8;">Tes commentaires, tes idées, tes suggestions... Tout est pris en compte ! La communauté façonne le contenu de la chaîne.</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="https://discord.gg/qRYPYyxt4v" target="_blank" class="discord-button">
+                        <span style="position: relative; z-index: 1;">💬 REJOINDRE LE DISCORD</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-section" style="background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(238,90,111,0.1));">
+            <h2 style="font-size: 3em; margin-bottom: 25px; text-align: center; background: linear-gradient(45deg, #a78bfa, #ff6b6b); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💫 Pourquoi TWISTER ?</h2>
+            <p style="font-size: 1.4em; text-align: center; line-height: 2; opacity: 0.9;">
+                Parce que comme un tourbillon, je mélange les genres, les styles et les émotions 
+                pour créer du contenu qui te surprendra à chaque fois. Prêt pour le ride ?
+            </p>
+        </div>
+
+        <div class="discord-section">
+            <h2 style="font-size: 3em; margin-bottom: 25px; position: relative; z-index: 1;">💬 Rejoins le Discord !</h2>
+            <p style="font-size: 1.4em; margin-bottom: 40px; opacity: 0.9; position: relative; z-index: 1;">
+                Viens discuter, jouer et partager avec toute la communauté TWISTER ! <br>
+                C'est là que tout se passe : annonces, events, gaming sessions et bien plus !
+            </p>
+            <a href="https://discord.gg/qRYPYyxt4v" target="_blank" class="discord-button">
+                <span style="position: relative; z-index: 1;">🎮 REJOINDRE LE DISCORD</span>
+            </a>
+        </div>
+
+        <div class="video-section" id="quiz-section" style="background: linear-gradient(135deg, rgba(107,203,127,0.1), rgba(78,205,196,0.1));">
+            <h2 style="font-size: 3em; margin-bottom: 40px; text-align: center; background: linear-gradient(45deg, #6bcf7f, #4ecdc4); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 QUIZ - Choisis ton jeu !</h2>
+            
+            <div id="game-selection-container">
+                <p style="font-size: 1.4em; text-align: center; margin-bottom: 30px;">Sélectionne un jeu pour commencer le quiz :</p>
+                <div class="game-selection">
+                    <button class="game-btn" onclick="selectGame('fortnite')">
+                        <img src="logo fortnit.png" alt="Fortnite" class="game-icon">
+                        <div class="game-name">FORTNITE</div>
+                    </button>
+                    <button class="game-btn" onclick="selectGame('valorant')">
+                        <img src="valo.webp" alt="Valorant" class="game-icon">
+                        <div class="game-name">VALORANT</div>
+                    </button>
+                    <button class="game-btn" onclick="selectGame('minecraft')">
+                        <img src="image minecraft.webp" alt="Minecraft" class="game-icon">
+                        <div class="game-name">MINECRAFT</div>
+                    </button>
+                    <button class="game-btn" onclick="selectGame('roblox')">
+                        <img src="image roblox.png" alt="Roblox" class="game-icon">
+                        <div class="game-name">ROBLOX</div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" style="display: none;">
+                <div class="question-card">
+                    <h3 id="question" style="font-size: 1.7em; margin-bottom: 30px; text-align: center;"></h3>
+                    <div id="answers" class="answers-grid"></div>
+                </div>
+                
+                <div id="quiz-result" style="display: none; text-align: center;">
+                    <h3 style="font-size: 3em; margin-bottom: 30px;">🏆 Score Final</h3>
+                    <div class="stat-number" id="final-score" style="font-size: 5em;"></div>
+                    <p style="font-size: 1.5em; margin: 30px 0;" id="result-message"></p>
+                    <button onclick="backToGameSelection()" class="cta-button" style="cursor: pointer; border: none; background: linear-gradient(45deg, #6bcf7f, #4ecdc4);">
+                        <span style="position: relative; z-index: 1;">🎮 Choisir un autre jeu</span>
+                    </button>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="font-size: 1.8em; font-weight: bold;">Score: <span id="score">0</span> / <span id="total">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@twister-y7h" target="_blank">📺 YouTube</a>
+            <a href="https://discord.gg/qRYPYyxt4v" target="_blank">💬 Discord</a>
+        </div>
+        <p style="margin-top: 30px; opacity: 0.8; font-size: 1.1em;">© 2026 TWISTER - Tous droits réservés</p>
+        <p style="opacity: 0.6; margin-top: 15px;">Made with 💜 by Claude</p>
+    </footer>
+
+    <script>
+        // Générer des étoiles aléatoires
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Générer des particules flottantes
+        const particlesContainer = document.getElementById('particles');
+        const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4ecdc4', '#a78bfa'];
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = (Math.random() * 100 + 50) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.opacity = Math.random() * 0.1 + 0.05;
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById('modal-' + modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeModalOnBackground(event, modalId) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(modalId);
+            }
+        }
+
+        // QUIZ SYSTEM
+        const quizData = {
+            fortnite: [
+                {
+                    question: "Quel est l'objectif principal dans Fortnite Battle Royale ?",
+                    answers: ["Construire des bases", "Faire une Victory Royale", "Farmer des ressources", "Danser"],
+                    correct: 1
+                },
+                {
+                    question: "Quelle arme légendaire est la plus rare dans Fortnite ?",
+                    answers: ["SCAR", "Pompe", "Fusil de sniper", "Lance-roquettes"],
+                    correct: 0
+                },
+                {
+                    question: "Combien de joueurs maximum dans une partie classique ?",
+                    answers: ["50", "75", "100", "150"],
+                    correct: 2
+                },
+                {
+                    question: "Quel matériau est le plus résistant ?",
+                    answers: ["Bois", "Pierre", "Métal", "Tous pareils"],
+                    correct: 2
+                },
+                {
+                    question: "Comment appelle-t-on la tempête qui rétrécit ?",
+                    answers: ["Le storm", "La zone", "Le cercle", "La tempête"],
+                    correct: 0
+                }
+            ],
+            valorant: [
+                {
+                    question: "Quel agent peut téléporter son équipe ?",
+                    answers: ["Jett", "Omen", "Reyna", "Yoru"],
+                    correct: 1
+                },
+                {
+                    question: "Combien de crédits coûte un Vandal ?",
+                    answers: ["2700", "2900", "3100", "2500"],
+                    correct: 1
+                },
+                {
+                    question: "Quel est le rôle principal de Sage ?",
+                    answers: ["Duelliste", "Sentinelle", "Contrôleur", "Initiateur"],
+                    correct: 1
+                },
+                {
+                    question: "Combien de rounds faut-il gagner pour remporter une partie ?",
+                    answers: ["10", "12", "13", "15"],
+                    correct: 2
+                },
+                {
+                    question: "Quelle arme fait le plus de dégâts en headshot ?",
+                    answers: ["Vandal", "Phantom", "Sheriff", "Operator"],
+                    correct: 3
+                }
+            ],
+            minecraft: [
+                {
+                    question: "Quel minerai est le plus rare dans Minecraft ?",
+                    answers: ["Diamant", "Émeraude", "Or", "Netherite"],
+                    correct: 3
+                },
+                {
+                    question: "À quelle couche trouve-t-on le plus de diamants ?",
+                    answers: ["Y: 5-12", "Y: 13-20", "Y: 1-15", "Y: -64 à -16"],
+                    correct: 3
+                },
+                {
+                    question: "Combien de blocks différents peut porter un Enderman ?",
+                    answers: ["Tous", "Seulement certains", "Aucun", "Les blocs naturels"],
+                    correct: 1
+                },
+                {
+                    question: "Quel mob est le plus dangereux du Nether ?",
+                    answers: ["Ghast", "Blaze", "Wither Skeleton", "Piglin Brute"],
+                    correct: 3
+                },
+                {
+                    question: "Que faut-il pour créer un portail du Nether ?",
+                    answers: ["10 obsidiennes", "12 obsidiennes", "14 obsidiennes", "16 obsidiennes"],
+                    correct: 0
+                }
+            ],
+            roblox: [
+                {
+                    question: "Quelle est la monnaie principale de Roblox ?",
+                    answers: ["Coins", "Robux", "Points", "Gems"],
+                    correct: 1
+                },
+                {
+                    question: "Quel jeu Roblox a le plus de visites ?",
+                    answers: ["Adopt Me", "Brookhaven", "Tower of Hell", "Bloxburg"],
+                    correct: 0
+                },
+                {
+                    question: "Comment s'appelle le personnage par défaut ?",
+                    answers: ["Noob", "Guest", "Player", "Avatar"],
+                    correct: 0
+                },
+                {
+                    question: "Quel outil permet de créer des jeux sur Roblox ?",
+                    answers: ["Roblox Builder", "Roblox Studio", "Game Maker", "Roblox Creator"],
+                    correct: 1
+                },
+                {
+                    question: "Quelle année Roblox a été créé ?",
+                    answers: ["2004", "2006", "2008", "2010"],
+                    correct: 1
+                }
+            ]
+        };
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        let selectedGame = null;
+
+        function selectGame(game) {
+            selectedGame = game;
+            
+            // Highlight du bouton sélectionné
+            document.querySelectorAll('.game-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.closest('.game-btn').classList.add('selected');
+            
+            // Démarrer le quiz après un court délai
+            setTimeout(() => {
+                document.getElementById('game-selection-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                currentQuestion = 0;
+                score = 0;
+                document.getElementById('score').textContent = '0';
+                loadQuestion();
+            }, 500);
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const q = quizData[selectedGame][currentQuestion];
+            document.getElementById('question').textContent = q.question;
+            
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            
+            q.answers.forEach((answer, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.textContent = answer;
+                btn.onclick = () => checkAnswer(index);
+                answersDiv.appendChild(btn);
+            });
+
+            document.getElementById('total').textContent = quizData[selectedGame].length;
+        }
+
+        function checkAnswer(selected) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[selectedGame][currentQuestion];
+            const buttons = document.querySelectorAll('.answer-btn');
+            
+            if (selected === q.correct) {
+                buttons[selected].classList.add('correct');
+                score++;
+                document.getElementById('score').textContent = score;
+            } else {
+                buttons[selected].classList.add('incorrect');
+                buttons[q.correct].classList.add('correct');
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData[selectedGame].length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 2000);
+        }
+
+        function showResults() {
+            document.querySelector('.question-card').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            
+            const finalScore = document.getElementById('final-score');
+            finalScore.textContent = score + ' / ' + quizData[selectedGame].length;
+            
+            const message = document.getElementById('result-message');
+            const percentage = (score / quizData[selectedGame].length) * 100;
+            
+            if (percentage === 100) {
+                message.textContent = "🔥 PARFAIT ! Tu maîtrises " + selectedGame.toUpperCase() + " ! 🔥";
+            } else if (percentage >= 70) {
+                message.textContent = "👏 Super ! Tu connais bien " + selectedGame.toUpperCase() + " !";
+            } else if (percentage >= 50) {
+                message.textContent = "👍 Pas mal ! Continue à jouer à " + selectedGame.toUpperCase() + " !";
+            } else {
+                message.textContent = "💪 Il faut plus jouer à " + selectedGame.toUpperCase() + " !";
+            }
+        }
+
+        function backToGameSelection() {
+            document.getElementById('game-selection-container').style.display = 'block';
+            document.getElementById('quiz-container').style.display = 'none';
+            document.querySelector('.question-card').style.display = 'block';
+            document.getElementById('quiz-result').style.display = 'none';
+            
+            // Retirer la sélection
+            document.querySelectorAll('.game-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+    </script>
