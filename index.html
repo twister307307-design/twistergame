@@ -18,7 +18,6 @@
             overflow-x: hidden;
         }
 
-        /* Fond animé avec particules */
         .background {
             position: fixed;
             width: 100%;
@@ -48,7 +47,6 @@
             50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* Particules flottantes */
         .particle {
             position: fixed;
             border-radius: 50%;
@@ -62,7 +60,6 @@
             66% { transform: translate(-50px, 50px) rotate(240deg); }
         }
 
-        /* Header avec effet 3D */
         header {
             text-align: center;
             padding: 80px 20px;
@@ -84,7 +81,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientShift 5s ease infinite, float3D 4s ease-in-out infinite;
-            text-shadow: 0 0 80px rgba(255,255,255,0.3);
             filter: drop-shadow(0 10px 30px rgba(167, 139, 250, 0.5));
         }
 
@@ -134,7 +130,6 @@
             padding: 20px;
         }
 
-        /* Stats cards avec effet glassmorphism */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -167,9 +162,7 @@
             transition: all 0.5s ease;
         }
 
-        .stat-card:hover::before {
-            left: 100%;
-        }
+        .stat-card:hover::before { left: 100%; }
 
         .stat-card:hover {
             transform: translateY(-15px) scale(1.05);
@@ -181,11 +174,6 @@
             max-height: 300px;
             margin-top: 20px;
             opacity: 1;
-        }
-
-        .stat-card.active {
-            background: rgba(167, 139, 250, 0.2);
-            border-color: rgba(167, 139, 250, 0.8);
         }
 
         .stat-details {
@@ -224,7 +212,6 @@
             letter-spacing: 1px;
         }
 
-        /* Video section modernisée */
         .video-section {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -254,7 +241,6 @@
             100% { background-position: 200% 0%; }
         }
 
-        /* CTA Button avec effet néon */
         .cta-button {
             display: inline-block;
             padding: 25px 60px;
@@ -284,16 +270,13 @@
             border-radius: 50px;
         }
 
-        .cta-button:hover::before {
-            width: 100%;
-        }
+        .cta-button:hover::before { width: 100%; }
 
         .cta-button:hover {
             transform: scale(1.1) translateY(-5px);
             box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
         }
 
-        /* Content cards avec effet 3D */
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -327,9 +310,7 @@
             z-index: -1;
         }
 
-        .content-card:hover::after {
-            opacity: 1;
-        }
+        .content-card:hover::after { opacity: 1; }
 
         .content-card:hover {
             transform: translateY(-20px) rotateX(5deg);
@@ -358,7 +339,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Modal ultra moderne */
         .modal {
             display: none;
             position: fixed;
@@ -371,17 +351,9 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            animation: fadeInModal 0.3s ease;
         }
 
-        .modal.active {
-            display: flex;
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             background: linear-gradient(135deg, rgba(26, 31, 58, 0.98), rgba(15, 20, 40, 0.98));
@@ -398,14 +370,8 @@
         }
 
         @keyframes slideInModal {
-            from {
-                transform: scale(0.8) translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
+            from { transform: scale(0.8) translateY(-50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .modal-close {
@@ -424,13 +390,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1;
         }
 
         .modal-close:hover {
             background: rgba(255, 107, 107, 0.8);
             transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
         }
 
         .modal h2 {
@@ -450,30 +414,11 @@
             margin: 20px 0;
             border-radius: 15px;
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-detail::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(180deg, #a78bfa, #ff6b6b);
-            animation: slideDown 2s ease-in-out infinite;
-        }
-
-        @keyframes slideDown {
-            0%, 100% { transform: translateY(-100%); }
-            50% { transform: translateY(100%); }
         }
 
         .modal-detail:hover {
             background: rgba(167, 139, 250, 0.2);
             transform: translateX(15px);
-            box-shadow: -5px 5px 20px rgba(167, 139, 250, 0.3);
         }
 
         .modal-detail h4 {
@@ -482,7 +427,6 @@
             color: #ffd93d;
         }
 
-        /* Discord section avec style Discord */
         .discord-section {
             background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(114, 137, 218, 0.2));
             backdrop-filter: blur(20px);
@@ -521,29 +465,12 @@
             overflow: hidden;
         }
 
-        .discord-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            transition: width 0.4s ease;
-            border-radius: 50px;
-        }
-
-        .discord-button:hover::before {
-            width: 100%;
-        }
-
         .discord-button:hover {
             transform: scale(1.1) translateY(-5px);
             box-shadow: 0 15px 50px rgba(88, 101, 242, 0.6);
         }
 
-        /* Quiz section stylisée */
+        /* ===== QUIZ SECTION ===== */
         #quiz-section {
             position: relative;
         }
@@ -565,6 +492,112 @@
         @keyframes ledRotate {
             0% { background-position: 0% 50%; }
             100% { background-position: 400% 50%; }
+        }
+
+        /* ===== BADGE NOUVELLE MAJ ===== */
+        .update-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(135deg, rgba(107, 203, 127, 0.15), rgba(78, 205, 196, 0.15));
+            border: 2px solid rgba(107, 203, 127, 0.5);
+            border-radius: 20px;
+            padding: 18px 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: bannerAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bannerAppear {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .update-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .new-badge {
+            background: linear-gradient(45deg, #6bcf7f, #4ecdc4);
+            color: #0a0e27;
+            font-size: 0.85em;
+            font-weight: 900;
+            padding: 5px 14px;
+            border-radius: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: badgePulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(107, 203, 127, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(107, 203, 127, 1); transform: scale(1.05); }
+        }
+
+        .update-text {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .update-text span {
+            color: #6bcf7f;
+            font-weight: 800;
+        }
+
+        .update-stars {
+            font-size: 1.2em;
+            animation: spin 4s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Question counter */
+        .question-counter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .q-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(167, 139, 250, 0.2);
+            border: 2px solid rgba(167, 139, 250, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .q-dot.active {
+            background: #a78bfa;
+            border-color: #a78bfa;
+            box-shadow: 0 0 12px rgba(167, 139, 250, 0.8);
+            transform: scale(1.3);
+        }
+
+        .q-dot.done {
+            background: #6bcf7f;
+            border-color: #6bcf7f;
+            box-shadow: 0 0 10px rgba(107, 203, 127, 0.6);
         }
 
         .game-selection {
@@ -595,20 +628,15 @@
         .game-btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.5s, height 0.5s;
         }
 
-        .game-btn:hover::before {
-            width: 300%;
-            height: 300%;
-        }
+        .game-btn:hover::before { width: 300%; height: 300%; }
 
         .game-btn:hover {
             background: rgba(167, 139, 250, 0.3);
@@ -637,10 +665,7 @@
             filter: drop-shadow(0 8px 20px rgba(167, 139, 250, 0.6));
         }
 
-        .game-name {
-            position: relative;
-            z-index: 1;
-        }
+        .game-name { position: relative; z-index: 1; }
 
         .question-card {
             background: rgba(255, 255, 255, 0.05);
@@ -648,6 +673,12 @@
             padding: 40px;
             margin-bottom: 30px;
             border: 2px solid rgba(167, 139, 250, 0.3);
+            animation: cardIn 0.4s ease;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .answers-grid {
@@ -668,24 +699,6 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .answer-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-        }
-
-        .answer-btn:hover::before {
-            width: 300%;
-            height: 300%;
         }
 
         .answer-btn:hover {
@@ -720,7 +733,6 @@
             75% { transform: translateX(15px); }
         }
 
-        /*  moderne */
         footer {
             text-align: center;
             padding: 60px 20px;
@@ -730,9 +742,7 @@
             border-top: 2px solid rgba(167, 139, 250, 0.3);
         }
 
-        .social-links {
-            margin: 30px 0;
-        }
+        .social-links { margin: 30px 0; }
 
         .social-links a {
             color: white;
@@ -746,28 +756,12 @@
         .social-links a:hover {
             color: #ffd93d;
             transform: translateY(-5px) scale(1.1);
-            text-shadow: 0 0 20px rgba(255, 217, 61, 0.8);
         }
 
-        /* Scrollbar personnalisée */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #a78bfa, #ff6b6b); border-radius: 10px; }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #a78bfa, #ff6b6b);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #ff6b6b, #ffd93d);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .logo { font-size: 3em; }
             .tagline { font-size: 1.2em; }
@@ -787,7 +781,7 @@
             <div class="logo-glow"></div>
             <div class="logo">TWISTER</div>
         </div>
-        <div class="tagline"> Là où le contenu prend vie </div>
+        <div class="tagline">🌪️ Là où le contenu prend vie 🌪️</div>
     </header>
 
     <div class="container">
@@ -795,7 +789,7 @@
             <div class="stat-card">
                 <div class="stat-number">∞</div>
                 <div class="stat-label">CRÉATIVITÉ</div>
-                <div id="creativity" class="stat-details">
+                <div class="stat-details">
                     <p>🎨 Des idées infinies qui ne s'arrêtent jamais !</p>
                     <p>✨ Chaque vidéo est unique et pensée avec originalité</p>
                     <p>🌟 L'imagination est la seule limite ici !</p>
@@ -804,7 +798,7 @@
             <div class="stat-card">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">PASSION</div>
-                <div id="passion" class="stat-details">
+                <div class="stat-details">
                     <p>❤️ Tout ce que je fais vient du cœur !</p>
                     <p>🔥 Une énergie débordante dans chaque projet</p>
                     <p>💪 Investissement total pour vous offrir le meilleur !</p>
@@ -813,7 +807,7 @@
             <div class="stat-card">
                 <div class="stat-number">24/7</div>
                 <div class="stat-label">DÉTERMINATION</div>
-                <div id="determination" class="stat-details">
+                <div class="stat-details">
                     <p>⚡ Toujours actif, toujours motivé !</p>
                     <p>🎯 Des objectifs clairs et la volonté de les atteindre</p>
                     <p>🚀 Rien ne peut arrêter cette machine à contenu !</p>
@@ -822,14 +816,14 @@
         </div>
 
         <div class="video-section">
-            <h2 style="font-size: 3em; margin-bottom: 25px; text-align: center; background: linear-gradient(45deg, #ff6b6b, #ffd93d); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎬 Bienvenue sur ma chaîne !</h2>
-            <p style="font-size: 1.4em; text-align: center; line-height: 2; opacity: 0.9;">
+            <h2 style="font-size:3em;margin-bottom:25px;text-align:center;background:linear-gradient(45deg,#ff6b6b,#ffd93d);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🎬 Bienvenue sur ma chaîne !</h2>
+            <p style="font-size:1.4em;text-align:center;line-height:2;opacity:0.9;">
                 Rejoins l'aventure TWISTER ! Ici, c'est un tourbillon de contenu unique, 
                 de moments épiques et de vibes incroyables. Chaque vidéo est une nouvelle expérience !
             </p>
-            <div style="text-align: center; margin-top: 40px;">
+            <div style="text-align:center;margin-top:40px;">
                 <a href="https://www.youtube.com/@twister-y7h" target="_blank" class="cta-button">
-                    <span style="position: relative; z-index: 1;">▶️ ABONNE-TOI MAINTENANT</span>
+                    <span style="position:relative;z-index:1;">▶️ ABONNE-TOI MAINTENANT</span>
                 </a>
             </div>
         </div>
@@ -838,20 +832,20 @@
             <div class="content-card" onclick="openModal('gaming')">
                 <span class="content-icon">🎮</span>
                 <h3>Gaming</h3>
-                <p style="font-size: 1.1em; line-height: 1.8;">Des gameplay intenses, des moments drôles et des victoires épiques ! Découvre mes sessions de jeu et rejoins la team.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+                <p style="font-size:1.1em;line-height:1.8;">Des gameplay intenses, des moments drôles et des victoires épiques ! Découvre mes sessions de jeu et rejoins la team.</p>
+                <p style="margin-top:20px;font-size:0.95em;opacity:0.7;font-weight:bold;">👆 Clique pour en savoir plus</p>
             </div>
             <div class="content-card" onclick="openModal('creativity')">
                 <span class="content-icon">🎨</span>
                 <h3>Créativité</h3>
-                <p style="font-size: 1.1em; line-height: 1.8;">Du contenu original et créatif qui sort de l'ordinaire. Chaque vidéo est une aventure unique !</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+                <p style="font-size:1.1em;line-height:1.8;">Du contenu original et créatif qui sort de l'ordinaire. Chaque vidéo est une aventure unique !</p>
+                <p style="margin-top:20px;font-size:0.95em;opacity:0.7;font-weight:bold;">👆 Clique pour en savoir plus</p>
             </div>
             <div class="content-card" onclick="openModal('community')">
                 <span class="content-icon">🔥</span>
                 <h3>Communauté</h3>
-                <p style="font-size: 1.1em; line-height: 1.8;">Une communauté de passionnés qui partage les mêmes vibes. Ensemble, on crée quelque chose d'incroyable !</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.7; font-weight: bold;">👆 Clique pour en savoir plus</p>
+                <p style="font-size:1.1em;line-height:1.8;">Une communauté de passionnés qui partage les mêmes vibes. Ensemble, on crée quelque chose d'incroyable !</p>
+                <p style="margin-top:20px;font-size:0.95em;opacity:0.7;font-weight:bold;">👆 Clique pour en savoir plus</p>
             </div>
         </div>
 
@@ -860,27 +854,11 @@
             <div class="modal-content" onclick="event.stopPropagation()">
                 <button class="modal-close" onclick="closeModal('modal-gaming')">×</button>
                 <h2>🎮 Gaming</h2>
-                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Plonge dans l'univers gaming de TWISTER !</p>
-                
-                <div class="modal-detail">
-                    <h4>🔥 Gameplay Intense</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des parties explosives sur les jeux les plus populaires : Fortnite, Minecraft, Valorant, GTA et bien d'autres ! Chaque session est un nouveau défi à relever.</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>😂 Moments Epic Fails</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Parce que tout ne se passe pas toujours comme prévu ! Des moments de rage, de rire et de fun absolu qui rendent chaque vidéo unique et authentique.</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>🏆 Défis & Challenges</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des challenges impossibles, des speedruns, des défis communautaires... Toujours à repousser les limites pour te proposer du contenu inédit !</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>👥 Collaborations</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des parties avec d'autres créateurs, des tournois, des événements spéciaux. L'union fait la force et le divertissement !</p>
-                </div>
+                <p style="font-size:1.3em;margin-bottom:30px;text-align:center;opacity:0.9;">Plonge dans l'univers gaming de TWISTER !</p>
+                <div class="modal-detail"><h4>🔥 Gameplay Intense</h4><p style="font-size:1.1em;line-height:1.8;">Des parties explosives sur les jeux les plus populaires : Fortnite, Minecraft, Valorant, GTA et bien d'autres ! Chaque session est un nouveau défi à relever.</p></div>
+                <div class="modal-detail"><h4>😂 Moments Epic Fails</h4><p style="font-size:1.1em;line-height:1.8;">Parce que tout ne se passe pas toujours comme prévu ! Des moments de rage, de rire et de fun absolu qui rendent chaque vidéo unique et authentique.</p></div>
+                <div class="modal-detail"><h4>🏆 Défis & Challenges</h4><p style="font-size:1.1em;line-height:1.8;">Des challenges impossibles, des speedruns, des défis communautaires... Toujours à repousser les limites pour te proposer du contenu inédit !</p></div>
+                <div class="modal-detail"><h4>👥 Collaborations</h4><p style="font-size:1.1em;line-height:1.8;">Des parties avec d'autres créateurs, des tournois, des événements spéciaux. L'union fait la force et le divertissement !</p></div>
             </div>
         </div>
 
@@ -888,27 +866,11 @@
             <div class="modal-content" onclick="event.stopPropagation()">
                 <button class="modal-close" onclick="closeModal('modal-creativity')">×</button>
                 <h2>🎨 Créativité</h2>
-                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Découvre l'univers créatif de TWISTER !</p>
-                
-                <div class="modal-detail">
-                    <h4>✨ Montages Épiques</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des montages travaillés avec des effets visuels de ouf, des transitions fluides et une ambiance unique. Chaque vidéo est une œuvre d'art en soi !</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>💡 Concepts Originaux</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des idées qui sortent de nulle part ! Des formats que tu ne verras pas ailleurs, des expérimentations folles qui repoussent les limites de la créativité.</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>🎬 Production de Qualité</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Du matériel pro, un son au top, des visuels soignés. Chaque détail compte pour t'offrir la meilleure expérience possible.</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>🌟 Touche Personnelle</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Un style unique qui définit TWISTER. Une identité visuelle reconnaissable, une atmosphère spéciale qui te transporte à chaque vidéo.</p>
-                </div>
+                <p style="font-size:1.3em;margin-bottom:30px;text-align:center;opacity:0.9;">Découvre l'univers créatif de TWISTER !</p>
+                <div class="modal-detail"><h4>✨ Montages Épiques</h4><p style="font-size:1.1em;line-height:1.8;">Des montages travaillés avec des effets visuels de ouf, des transitions fluides et une ambiance unique.</p></div>
+                <div class="modal-detail"><h4>💡 Concepts Originaux</h4><p style="font-size:1.1em;line-height:1.8;">Des idées qui sortent de nulle part ! Des formats que tu ne verras pas ailleurs, des expérimentations folles.</p></div>
+                <div class="modal-detail"><h4>🎬 Production de Qualité</h4><p style="font-size:1.1em;line-height:1.8;">Du matériel pro, un son au top, des visuels soignés. Chaque détail compte pour t'offrir la meilleure expérience possible.</p></div>
+                <div class="modal-detail"><h4>🌟 Touche Personnelle</h4><p style="font-size:1.1em;line-height:1.8;">Un style unique qui définit TWISTER. Une identité visuelle reconnaissable qui te transporte à chaque vidéo.</p></div>
             </div>
         </div>
 
@@ -916,93 +878,94 @@
             <div class="modal-content" onclick="event.stopPropagation()">
                 <button class="modal-close" onclick="closeModal('modal-community')">×</button>
                 <h2>🔥 Communauté</h2>
-                <p style="font-size: 1.3em; margin-bottom: 30px; text-align: center; opacity: 0.9;">Rejoins la team TWISTER !</p>
-                
-                <div class="modal-detail">
-                    <h4>💜 Une Vraie Famille</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Plus qu'une simple communauté, c'est une famille de passionnés qui partagent les mêmes vibes. Ici, tout le monde est le bienvenu !</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>💬 Discord Actif</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Un serveur Discord animé où on se retrouve pour discuter, jouer ensemble et partager nos meilleures moments. Des salons pour tout le monde !</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>🎉 Événements Spéciaux</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Des lives exclusifs, des tournois communautaires, des give-aways et plein d'autres surprises réservées aux abonnés !</p>
-                </div>
-                
-                <div class="modal-detail">
-                    <h4>📢 Ta Voix Compte</h4>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Tes commentaires, tes idées, tes suggestions... Tout est pris en compte ! La communauté façonne le contenu de la chaîne.</p>
-                </div>
-                
-                <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size:1.3em;margin-bottom:30px;text-align:center;opacity:0.9;">Rejoins la team TWISTER !</p>
+                <div class="modal-detail"><h4>💜 Une Vraie Famille</h4><p style="font-size:1.1em;line-height:1.8;">Plus qu'une simple communauté, c'est une famille de passionnés qui partagent les mêmes vibes.</p></div>
+                <div class="modal-detail"><h4>💬 Discord Actif</h4><p style="font-size:1.1em;line-height:1.8;">Un serveur Discord animé où on se retrouve pour discuter, jouer ensemble et partager nos meilleurs moments.</p></div>
+                <div class="modal-detail"><h4>🎉 Événements Spéciaux</h4><p style="font-size:1.1em;line-height:1.8;">Des lives exclusifs, des tournois communautaires, des give-aways et plein d'autres surprises !</p></div>
+                <div class="modal-detail"><h4>📢 Ta Voix Compte</h4><p style="font-size:1.1em;line-height:1.8;">Tes commentaires, tes idées, tes suggestions... Tout est pris en compte ! La communauté façonne le contenu.</p></div>
+                <div style="text-align:center;margin-top:40px;">
                     <a href="https://discord.gg/qRYPYyxt4v" target="_blank" class="discord-button">
-                        <span style="position: relative; z-index: 1;">💬 REJOINDRE LE DISCORD</span>
+                        <span style="position:relative;z-index:1;">💬 REJOINDRE LE DISCORD</span>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="video-section" style="background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(238,90,111,0.1));">
-            <h2 style="font-size: 3em; margin-bottom: 25px; text-align: center; background: linear-gradient(45deg, #a78bfa, #ff6b6b); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💫 Pourquoi TWISTER ?</h2>
-            <p style="font-size: 1.4em; text-align: center; line-height: 2; opacity: 0.9;">
+        <div class="video-section" style="background:linear-gradient(135deg,rgba(255,107,107,0.1),rgba(238,90,111,0.1));">
+            <h2 style="font-size:3em;margin-bottom:25px;text-align:center;background:linear-gradient(45deg,#a78bfa,#ff6b6b);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">💫 Pourquoi TWISTER ?</h2>
+            <p style="font-size:1.4em;text-align:center;line-height:2;opacity:0.9;">
                 Parce que comme un tourbillon, je mélange les genres, les styles et les émotions 
                 pour créer du contenu qui te surprendra à chaque fois. Prêt pour le ride ?
             </p>
         </div>
 
         <div class="discord-section">
-            <h2 style="font-size: 3em; margin-bottom: 25px; position: relative; z-index: 1;">💬 Rejoins le Discord !</h2>
-            <p style="font-size: 1.4em; margin-bottom: 40px; opacity: 0.9; position: relative; z-index: 1;">
-                Viens discuter, jouer et partager avec toute la communauté TWISTER ! <br>
+            <h2 style="font-size:3em;margin-bottom:25px;position:relative;z-index:1;">💬 Rejoins le Discord !</h2>
+            <p style="font-size:1.4em;margin-bottom:40px;opacity:0.9;position:relative;z-index:1;">
+                Viens discuter, jouer et partager avec toute la communauté TWISTER !<br>
                 C'est là que tout se passe : annonces, events, gaming sessions et bien plus !
             </p>
             <a href="https://discord.gg/qRYPYyxt4v" target="_blank" class="discord-button">
-                <span style="position: relative; z-index: 1;">🎮 REJOINDRE LE DISCORD</span>
+                <span style="position:relative;z-index:1;">🎮 REJOINDRE LE DISCORD</span>
             </a>
         </div>
 
-        <div class="video-section" id="quiz-section" style="background: linear-gradient(135deg, rgba(107,203,127,0.1), rgba(78,205,196,0.1));">
-            <h2 style="font-size: 3em; margin-bottom: 40px; text-align: center; background: linear-gradient(45deg, #6bcf7f, #4ecdc4); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 QUIZ - Choisis ton jeu !</h2>
+        <!-- ===== QUIZ SECTION ===== -->
+        <div class="video-section" id="quiz-section" style="background:linear-gradient(135deg,rgba(107,203,127,0.1),rgba(78,205,196,0.1));">
+            <h2 style="font-size:3em;margin-bottom:20px;text-align:center;background:linear-gradient(45deg,#6bcf7f,#4ecdc4);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🎮 QUIZ - Choisis ton jeu !</h2>
+
+            <!-- BADGE MAJ -->
+            <div class="update-banner">
+                <span class="update-stars">✦</span>
+                <span class="new-badge">NEW</span>
+                <span class="update-text">Les questions sont maintenant <span>aléatoires</span> — t'auras jamais les mêmes à chaque fois !</span>
+                <span class="update-stars">✦</span>
+            </div>
             
             <div id="game-selection-container">
-                <p style="font-size: 1.4em; text-align: center; margin-bottom: 30px;">Sélectionne un jeu pour commencer le quiz :</p>
+                <p style="font-size:1.4em;text-align:center;margin-bottom:30px;">Sélectionne un jeu pour commencer le quiz :</p>
                 <div class="game-selection">
-                    <button class="game-btn" onclick="selectGame('fortnite')">
+                    <button class="game-btn" onclick="selectGame('fortnite', event)">
+                        <img src="logo fortnit.png" alt="Fortnite" class="game-icon">
                         <div class="game-name">FORTNITE</div>
                     </button>
-                    <button class="game-btn" onclick="selectGame('valorant')">
+                    <button class="game-btn" onclick="selectGame('valorant', event)">
+                        <img src="valo.webp" alt="Valorant" class="game-icon">
                         <div class="game-name">VALORANT</div>
                     </button>
-                    <button class="game-btn" onclick="selectGame('minecraft')">
+                    <button class="game-btn" onclick="selectGame('minecraft', event)">
+                        <img src="image minecraft.webp" alt="Minecraft" class="game-icon">
                         <div class="game-name">MINECRAFT</div>
                     </button>
-                    <button class="game-btn" onclick="selectGame('roblox')">
+                    <button class="game-btn" onclick="selectGame('roblox', event)">
+                        <img src="image roblox.png" alt="Roblox" class="game-icon">
                         <div class="game-name">ROBLOX</div>
                     </button>
                 </div>
             </div>
 
-            <div id="quiz-container" style="display: none;">
+            <div id="quiz-container" style="display:none;">
+                <div class="question-counter" id="question-counter"></div>
+
                 <div class="question-card">
-                    <h3 id="question" style="font-size: 1.7em; margin-bottom: 30px; text-align: center;"></h3>
+                    <h3 id="question" style="font-size:1.7em;margin-bottom:30px;text-align:center;"></h3>
                     <div id="answers" class="answers-grid"></div>
                 </div>
                 
-                <div id="quiz-result" style="display: none; text-align: center;">
-                    <h3 style="font-size: 3em; margin-bottom: 30px;">🏆 Score Final</h3>
-                    <div class="stat-number" id="final-score" style="font-size: 5em;"></div>
-                    <p style="font-size: 1.5em; margin: 30px 0;" id="result-message"></p>
-                    <button onclick="backToGameSelection()" class="cta-button" style="cursor: pointer; border: none; background: linear-gradient(45deg, #6bcf7f, #4ecdc4);">
-                        <span style="position: relative; z-index: 1;">🎮 Choisir un autre jeu</span>
+                <div id="quiz-result" style="display:none;text-align:center;">
+                    <h3 style="font-size:3em;margin-bottom:30px;">🏆 Score Final</h3>
+                    <div class="stat-number" id="final-score" style="font-size:5em;"></div>
+                    <p style="font-size:1.5em;margin:30px 0;" id="result-message"></p>
+                    <button onclick="backToGameSelection()" class="cta-button" style="cursor:pointer;border:none;background:linear-gradient(45deg,#6bcf7f,#4ecdc4);">
+                        <span style="position:relative;z-index:1;">🎮 Choisir un autre jeu</span>
+                    </button>
+                    <button onclick="replayGame()" class="cta-button" style="cursor:pointer;border:none;background:linear-gradient(45deg,#a78bfa,#ff6b6b);margin-left:10px;">
+                        <span style="position:relative;z-index:1;">🔄 Rejouer (nouvelles questions)</span>
                     </button>
                 </div>
 
-                <div style="text-align: center; margin-top: 40px;">
-                    <p style="font-size: 1.8em; font-weight: bold;">Score: <span id="score">0</span> / <span id="total">0</span></p>
+                <div style="text-align:center;margin-top:40px;">
+                    <p style="font-size:1.8em;font-weight:bold;">Score: <span id="score">0</span> / <span id="total">0</span></p>
                 </div>
             </div>
         </div>
@@ -1013,12 +976,12 @@
             <a href="https://www.youtube.com/@twister-y7h" target="_blank">📺 YouTube</a>
             <a href="https://discord.gg/qRYPYyxt4v" target="_blank">💬 Discord</a>
         </div>
-        <p style="margin-top: 30px; opacity: 0.8; font-size: 1.1em;">© 2026 TWISTER - Tous droits réservés</p>
-        <p style="opacity: 0.6; margin-top: 15px;">Made with 💜 by Twister</p>
+        <p style="margin-top:30px;opacity:0.8;font-size:1.1em;">© 2026 TWISTER - Tous droits réservés</p>
+        <p style="opacity:0.6;margin-top:15px;">Made with 💜 by Claude</p>
     </footer>
 
     <script>
-        // Générer des étoiles aléatoires
+        // ===== ÉTOILES & PARTICULES =====
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
@@ -1029,7 +992,6 @@
             starsContainer.appendChild(star);
         }
 
-        // Générer des particules flottantes
         const particlesContainer = document.getElementById('particles');
         const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4ecdc4', '#a78bfa'];
         for (let i = 0; i < 20; i++) {
@@ -1037,8 +999,9 @@
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.top = Math.random() * 100 + '%';
-            particle.style.width = (Math.random() * 100 + 50) + 'px';
-            particle.style.height = particle.style.width;
+            const size = (Math.random() * 100 + 50) + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
             particle.style.background = colors[Math.floor(Math.random() * colors.length)];
             particle.style.opacity = Math.random() * 0.1 + 0.05;
             particle.style.animationDelay = Math.random() * 20 + 's';
@@ -1046,7 +1009,7 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Modal functions
+        // ===== MODALS =====
         function openModal(modalId) {
             document.getElementById('modal-' + modalId).classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1058,156 +1021,156 @@
         }
 
         function closeModalOnBackground(event, modalId) {
-            if (event.target.classList.contains('modal')) {
-                closeModal(modalId);
-            }
+            if (event.target.classList.contains('modal')) closeModal(modalId);
         }
 
-        // QUIZ SYSTEM
-        const quizData = {
+        // ===== BANQUE DE QUESTIONS (15+ par jeu) =====
+        const allQuestions = {
             fortnite: [
-                {
-                    question: "Quel est l'objectif principal dans Fortnite Battle Royale ?",
-                    answers: ["Construire des bases", "Faire une Victory Royale", "Farmer des ressources", "Danser"],
-                    correct: 1
-                },
-                {
-                    question: "Quelle arme légendaire est la plus rare dans Fortnite ?",
-                    answers: ["SCAR", "Pompe", "Fusil de sniper", "Lance-roquettes"],
-                    correct: 0
-                },
-                {
-                    question: "Combien de joueurs maximum dans une partie classique ?",
-                    answers: ["50", "75", "100", "150"],
-                    correct: 2
-                },
-                {
-                    question: "Quel matériau est le plus résistant ?",
-                    answers: ["Bois", "Pierre", "Métal", "Tous pareils"],
-                    correct: 2
-                },
-                {
-                    question: "Comment appelle-t-on la tempête qui rétrécit ?",
-                    answers: ["Le storm", "La zone", "Le cercle", "La tempête"],
-                    correct: 0
-                }
+                { question: "Quel est l'objectif principal dans Fortnite Battle Royale ?", answers: ["Construire des bases", "Faire une Victory Royale", "Farmer des ressources", "Danser"], correct: 1 },
+                { question: "Quelle arme légendaire est associée à la couleur or dans Fortnite ?", answers: ["SCAR", "Pompe", "Fusil à pompe", "Lance-roquettes"], correct: 0 },
+                { question: "Combien de joueurs maximum dans une partie classique ?", answers: ["50", "75", "100", "150"], correct: 2 },
+                { question: "Quel matériau est le plus résistant pour construire ?", answers: ["Bois", "Pierre", "Métal", "Tous pareils"], correct: 2 },
+                { question: "Comment appelle-t-on la zone qui rétrécit dans Fortnite ?", answers: ["Le storm", "La zone", "Le cercle", "La tempête"], correct: 0 },
+                { question: "Quel mode de jeu permet de jouer en équipe de 4 ?", answers: ["Solo", "Duo", "Trio", "Squad"], correct: 3 },
+                { question: "Combien de matériaux peut-on porter au maximum ?", answers: ["500", "999", "750", "1000"], correct: 1 },
+                { question: "Quel objet permet de se soigner instantanément à 100% ?", answers: ["Bandages", "Trousse de soin", "Chug Jug", "Pomme"], correct: 2 },
+                { question: "Quelle saison a introduit les constructions dans Fortnite ?", answers: ["Saison 1", "Saison 2", "Saison 3", "C'était dès le début"], correct: 3 },
+                { question: "Comment s'appelle la monnaie premium de Fortnite ?", answers: ["V-Bucks", "Fortnite Coins", "Battle Points", "Gold Bars"], correct: 0 },
+                { question: "Quel lieu emblématique était présent dès le début du jeu ?", answers: ["Tilted Towers", "Pleasant Park", "Dusty Depot", "Retail Row"], correct: 1 },
+                { question: "Quel personnage est la mascotte officielle de Fortnite ?", answers: ["Jonesy", "Peely", "Beef Boss", "Drift"], correct: 0 },
+                { question: "Combien de shields maximum peut-on avoir ?", answers: ["50", "75", "100", "150"], correct: 2 },
+                { question: "Comment s'appelle le bus qui commence chaque partie ?", answers: ["Battle Bus", "Sky Bus", "Storm Bus", "Victory Bus"], correct: 0 },
+                { question: "Quel objet permet de se déplacer rapidement en hauteur ?", answers: ["Grappin", "Ballon", "Rift-to-Go", "Chiller Grenade"], correct: 2 },
+                { question: "Quelle rareté est supérieure au bleu dans Fortnite ?", answers: ["Vert", "Violet", "Orange", "Rouge"], correct: 1 }
             ],
             valorant: [
-                {
-                    question: "Quel agent peut téléporter son équipe ?",
-                    answers: ["Jett", "Omen", "Reyna", "Yoru"],
-                    correct: 1
-                },
-                {
-                    question: "Combien de crédits coûte un Vandal ?",
-                    answers: ["2700", "2900", "3100", "2500"],
-                    correct: 1
-                },
-                {
-                    question: "Quel est le rôle principal de Sage ?",
-                    answers: ["Duelliste", "Sentinelle", "Contrôleur", "Initiateur"],
-                    correct: 1
-                },
-                {
-                    question: "Combien de rounds faut-il gagner pour remporter une partie ?",
-                    answers: ["10", "12", "13", "15"],
-                    correct: 2
-                },
-                {
-                    question: "Quelle arme fait le plus de dégâts en headshot ?",
-                    answers: ["Vandal", "Phantom", "Sheriff", "Operator"],
-                    correct: 3
-                }
+                { question: "Quel agent peut créer des portails de téléportation pour l'équipe ?", answers: ["Jett", "Omen", "Reyna", "Yoru"], correct: 1 },
+                { question: "Combien de crédits coûte un Vandal ?", answers: ["2700", "2900", "3100", "2500"], correct: 1 },
+                { question: "Quel est le rôle principal de Sage ?", answers: ["Duelliste", "Sentinelle", "Contrôleur", "Initiateur"], correct: 1 },
+                { question: "Combien de rounds faut-il gagner pour remporter une partie ?", answers: ["10", "12", "13", "15"], correct: 2 },
+                { question: "Quelle arme fait le plus de dégâts en headshot ?", answers: ["Vandal", "Phantom", "Sheriff", "Operator"], correct: 3 },
+                { question: "Quel agent peut ressusciter ses coéquipiers ?", answers: ["Phoenix", "Sage", "Skye", "Breach"], correct: 1 },
+                { question: "Comment s'appelle la bombe dans Valorant ?", answers: ["Bombe C", "Spike", "Detonator", "Orb"], correct: 1 },
+                { question: "Quel agent Duelliste peut faire des dashes rapides ?", answers: ["Reyna", "Neon", "Jett", "Phoenix"], correct: 2 },
+                { question: "Combien de points de vie a un agent par défaut ?", answers: ["100", "125", "150", "200"], correct: 0 },
+                { question: "Quelle arme est gratuite en début de round ?", answers: ["Classic", "Shorty", "Ghost", "Frenzy"], correct: 0 },
+                { question: "Quel agent peut ralentir les ennemis avec de la glace ?", answers: ["Sage", "Harbor", "Viper", "Astra"], correct: 0 },
+                { question: "Combien d'agents étaient disponibles au lancement du jeu ?", answers: ["8", "10", "11", "12"], correct: 2 },
+                { question: "Quel studio a développé Valorant ?", answers: ["Blizzard", "Riot Games", "Bungie", "Epic Games"], correct: 1 },
+                { question: "Comment s'appelle la capacité ultime d'un agent ?", answers: ["Super", "Ult", "Ultimate", "Final Move"], correct: 2 },
+                { question: "Quelle map est considérée comme la plus iconique ?", answers: ["Bind", "Haven", "Ascent", "Split"], correct: 2 },
+                { question: "Combien de temps dure un round en attaque/défense ?", answers: ["1 min 30", "1 min 45", "2 min", "2 min 30"], correct: 1 }
             ],
             minecraft: [
-                {
-                    question: "Quel minerai est le plus rare dans Minecraft ?",
-                    answers: ["Diamant", "Émeraude", "Or", "Netherite"],
-                    correct: 3
-                },
-                {
-                    question: "À quelle couche trouve-t-on le plus de diamants ?",
-                    answers: ["Y: 5-12", "Y: 13-20", "Y: 1-15", "Y: -64 à -16"],
-                    correct: 3
-                },
-                {
-                    question: "Combien de blocks différents peut porter un Enderman ?",
-                    answers: ["Tous", "Seulement certains", "Aucun", "Les blocs naturels"],
-                    correct: 1
-                },
-                {
-                    question: "Quel mob est le plus dangereux du Nether ?",
-                    answers: ["Ghast", "Blaze", "Wither Skeleton", "Piglin Brute"],
-                    correct: 3
-                },
-                {
-                    question: "Que faut-il pour créer un portail du Nether ?",
-                    answers: ["10 obsidiennes", "12 obsidiennes", "14 obsidiennes", "16 obsidiennes"],
-                    correct: 0
-                }
+                { question: "Quel minerai est le plus rare dans Minecraft vanilla ?", answers: ["Diamant", "Émeraude", "Or", "Netherite"], correct: 3 },
+                { question: "À quelle hauteur trouve-t-on le plus de diamants depuis la 1.18 ?", answers: ["Y: 5-12", "Y: 13-20", "Y: 1-15", "Y: -64 à -16"], correct: 3 },
+                { question: "Quel mob ne peut porter qu'un seul type de bloc ?", answers: ["Enderman", "Creeper", "Zombie", "Squelette"], correct: 0 },
+                { question: "Quel boss final doit-on vaincre dans Minecraft ?", answers: ["Wither", "Ender Dragon", "Elder Guardian", "Ghast"], correct: 1 },
+                { question: "Combien d'obsidiennes minimum pour créer un portail du Nether ?", answers: ["10", "12", "14", "16"], correct: 0 },
+                { question: "Quel animal donne de la laine dans Minecraft ?", answers: ["Cochon", "Vache", "Mouton", "Poulet"], correct: 2 },
+                { question: "Comment s'appelle la dimension finale dans Minecraft ?", answers: ["Le Nether", "The End", "L'Abysse", "Le Vide"], correct: 1 },
+                { question: "Quel outil permet de miner le plus vite ?", answers: ["Pioche", "Pelle", "Hache", "Épée"], correct: 0 },
+                { question: "Quelle plante permet de faire des potions de rapidité ?", answers: ["Cactus", "Sugar Cane", "Blaze Rod", "Nether Wart"], correct: 3 },
+                { question: "Comment s'appelle le village dans le Nether ?", answers: ["Forteresse du Nether", "Bastion des Pillards", "Village Nether", "Citadelle"], correct: 1 },
+                { question: "Quel mob drop des plumes pour faire des flèches ?", answers: ["Chauve-souris", "Poulet", "Perroquet", "Fantôme"], correct: 1 },
+                { question: "Combien de cœurs a-t-on par défaut ?", answers: ["8", "10", "12", "20"], correct: 1 },
+                { question: "Quel enchantement est le plus utile pour farmer des XP ?", answers: ["Fortune", "Silk Touch", "Looting", "Mending"], correct: 3 },
+                { question: "Quelle couleur de lit permet de dormir et de changer son spawn ?", answers: ["N'importe quelle couleur", "Seulement rouge", "Seulement blanc", "Seulement la couleur de ton skin"], correct: 0 },
+                { question: "Quel bloc produit de la lumière avec une intensité de 15 ?", answers: ["Torche", "Glowstone", "Sea Lantern", "Lampe de Redstone"], correct: 1 },
+                { question: "Comment s'appelle la mise à jour qui a introduit les caves profondes ?", answers: ["1.17 Caves & Cliffs", "1.18 Caves & Cliffs Part 2", "1.19 Wild Update", "1.16 Nether Update"], correct: 1 }
             ],
             roblox: [
-                {
-                    question: "Quelle est la monnaie principale de Roblox ?",
-                    answers: ["Coins", "Robux", "Points", "Gems"],
-                    correct: 1
-                },
-                {
-                    question: "Quel jeu Roblox a le plus de visites ?",
-                    answers: ["Adopt Me", "Brookhaven", "Tower of Hell", "Bloxburg"],
-                    correct: 0
-                },
-                {
-                    question: "Comment s'appelle le personnage par défaut ?",
-                    answers: ["Noob", "Guest", "Player", "Avatar"],
-                    correct: 0
-                },
-                {
-                    question: "Quel outil permet de créer des jeux sur Roblox ?",
-                    answers: ["Roblox Builder", "Roblox Studio", "Game Maker", "Roblox Creator"],
-                    correct: 1
-                },
-                {
-                    question: "Quelle année Roblox a été créé ?",
-                    answers: ["2004", "2006", "2008", "2010"],
-                    correct: 1
-                }
+                { question: "Quelle est la monnaie principale de Roblox ?", answers: ["Coins", "Robux", "Points", "Gems"], correct: 1 },
+                { question: "Quel jeu Roblox a été le plus joué historiquement ?", answers: ["Adopt Me", "Brookhaven", "Tower of Hell", "Bloxburg"], correct: 0 },
+                { question: "Comment s'appelait le personnage guest par défaut ?", answers: ["Noob", "Guest", "Player", "Avatar"], correct: 1 },
+                { question: "Quel outil permet de créer des jeux sur Roblox ?", answers: ["Roblox Builder", "Roblox Studio", "Game Maker", "Roblox Creator"], correct: 1 },
+                { question: "Quelle année Roblox a été fondé ?", answers: ["2004", "2006", "2008", "2010"], correct: 1 },
+                { question: "Comment s'appelle le langage de programmation utilisé dans Roblox Studio ?", answers: ["Python", "JavaScript", "Lua", "C++"], correct: 2 },
+                { question: "Quel est le nom du fondateur de Roblox ?", answers: ["David Baszucki", "John Shedletsky", "Erik Cassel", "Alex Binello"], correct: 0 },
+                { question: "Combien de joueurs actifs mensuels Roblox avait-il en 2023 ?", answers: ["50 millions", "100 millions", "200 millions", "300 millions"], correct: 2 },
+                { question: "Quel jeu Roblox est connu pour ses obby difficiles ?", answers: ["Natural Disaster", "Tower of Hell", "Piggy", "Jailbreak"], correct: 1 },
+                { question: "Comment s'appelle le système d'avatars personnalisables ?", answers: ["Skin", "Avatar Shop", "Roblox Catalog", "Player Design"], correct: 2 },
+                { question: "Quel jeu Roblox est basé sur l'univers de Piggy (Peppa Pig) ?", answers: ["Bacon", "Piggy", "Oink", "Farm Story"], correct: 1 },
+                { question: "Quelle année les guests ont-ils été supprimés de Roblox ?", answers: ["2015", "2017", "2019", "2020"], correct: 1 },
+                { question: "Comment s'appelle la boutique d'items dans Roblox ?", answers: ["Roblox Store", "Avatar Shop", "Item Market", "Roblox Marketplace"], correct: 1 },
+                { question: "Quel type de jeu est Jailbreak ?", answers: ["Obby", "RPG", "Open world crime", "Tycoon"], correct: 2 },
+                { question: "Quel badge est le plus difficile à obtenir dans la plupart des jeux ?", answers: ["Welcome!", "Bricksmith", "Administrator", "Veteran"], correct: 3 },
+                { question: "Combien de Robux coûte l'abonnement Roblox Premium de base ?", answers: ["4,99$", "7,99$", "9,99$", "14,99$"], correct: 0 }
             ]
         };
+
+        const QUESTIONS_PER_QUIZ = 5;
+
+        // Fonction pour mélanger et piocher N questions au hasard
+        function getRandomQuestions(game, n) {
+            const pool = [...allQuestions[game]];
+            // Fisher-Yates shuffle
+            for (let i = pool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [pool[i], pool[j]] = [pool[j], pool[i]];
+            }
+            return pool.slice(0, n);
+        }
 
         let currentQuestion = 0;
         let score = 0;
         let answered = false;
         let selectedGame = null;
+        let currentQuizQuestions = [];
 
-        function selectGame(game) {
+        function selectGame(game, event) {
             selectedGame = game;
-            
-            // Highlight du bouton sélectionné
-            document.querySelectorAll('.game-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            event.target.closest('.game-btn').classList.add('selected');
-            
-            // Démarrer le quiz après un court délai
+
+            document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('selected'));
+            if (event && event.target) event.target.closest('.game-btn').classList.add('selected');
+
             setTimeout(() => {
                 document.getElementById('game-selection-container').style.display = 'none';
                 document.getElementById('quiz-container').style.display = 'block';
                 currentQuestion = 0;
                 score = 0;
                 document.getElementById('score').textContent = '0';
+
+                // Piocher des questions aléatoires
+                currentQuizQuestions = getRandomQuestions(game, QUESTIONS_PER_QUIZ);
+
+                buildQuestionCounter();
                 loadQuestion();
             }, 500);
         }
 
+        function buildQuestionCounter() {
+            const counter = document.getElementById('question-counter');
+            counter.innerHTML = '';
+            for (let i = 0; i < QUESTIONS_PER_QUIZ; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'q-dot';
+                dot.id = 'dot-' + i;
+                counter.appendChild(dot);
+            }
+            updateCounter();
+        }
+
+        function updateCounter() {
+            for (let i = 0; i < QUESTIONS_PER_QUIZ; i++) {
+                const dot = document.getElementById('dot-' + i);
+                if (!dot) continue;
+                dot.classList.remove('active', 'done');
+                if (i < currentQuestion) dot.classList.add('done');
+                else if (i === currentQuestion) dot.classList.add('active');
+            }
+        }
+
         function loadQuestion() {
             answered = false;
-            const q = quizData[selectedGame][currentQuestion];
+            updateCounter();
+            const q = currentQuizQuestions[currentQuestion];
             document.getElementById('question').textContent = q.question;
-            
+
             const answersDiv = document.getElementById('answers');
             answersDiv.innerHTML = '';
-            
+
             q.answers.forEach((answer, index) => {
                 const btn = document.createElement('button');
                 btn.className = 'answer-btn';
@@ -1216,16 +1179,16 @@
                 answersDiv.appendChild(btn);
             });
 
-            document.getElementById('total').textContent = quizData[selectedGame].length;
+            document.getElementById('total').textContent = QUESTIONS_PER_QUIZ;
         }
 
         function checkAnswer(selected) {
             if (answered) return;
             answered = true;
 
-            const q = quizData[selectedGame][currentQuestion];
+            const q = currentQuizQuestions[currentQuestion];
             const buttons = document.querySelectorAll('.answer-btn');
-            
+
             if (selected === q.correct) {
                 buttons[selected].classList.add('correct');
                 score++;
@@ -1237,7 +1200,7 @@
 
             setTimeout(() => {
                 currentQuestion++;
-                if (currentQuestion < quizData[selectedGame].length) {
+                if (currentQuestion < QUESTIONS_PER_QUIZ) {
                     loadQuestion();
                 } else {
                     showResults();
@@ -1248,22 +1211,33 @@
         function showResults() {
             document.querySelector('.question-card').style.display = 'none';
             document.getElementById('quiz-result').style.display = 'block';
-            
-            const finalScore = document.getElementById('final-score');
-            finalScore.textContent = score + ' / ' + quizData[selectedGame].length;
-            
+
+            document.getElementById('final-score').textContent = score + ' / ' + QUESTIONS_PER_QUIZ;
+
             const message = document.getElementById('result-message');
-            const percentage = (score / quizData[selectedGame].length) * 100;
-            
+            const percentage = (score / QUESTIONS_PER_QUIZ) * 100;
+
             if (percentage === 100) {
                 message.textContent = "🔥 PARFAIT ! Tu maîtrises " + selectedGame.toUpperCase() + " ! 🔥";
-            } else if (percentage >= 70) {
-                message.textContent = "👏 Super ! Tu connais bien " + selectedGame.toUpperCase() + " !";
-            } else if (percentage >= 50) {
+            } else if (percentage >= 80) {
+                message.textContent = "👏 Excellent ! Tu connais vraiment bien " + selectedGame.toUpperCase() + " !";
+            } else if (percentage >= 60) {
                 message.textContent = "👍 Pas mal ! Continue à jouer à " + selectedGame.toUpperCase() + " !";
             } else {
                 message.textContent = "💪 Il faut plus jouer à " + selectedGame.toUpperCase() + " !";
             }
+        }
+
+        function replayGame() {
+            document.querySelector('.question-card').style.display = 'block';
+            document.getElementById('quiz-result').style.display = 'none';
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').textContent = '0';
+            // Nouvelles questions aléatoires !
+            currentQuizQuestions = getRandomQuestions(selectedGame, QUESTIONS_PER_QUIZ);
+            buildQuestionCounter();
+            loadQuestion();
         }
 
         function backToGameSelection() {
@@ -1271,12 +1245,8 @@
             document.getElementById('quiz-container').style.display = 'none';
             document.querySelector('.question-card').style.display = 'block';
             document.getElementById('quiz-result').style.display = 'none';
-            
-            // Retirer la sélection
-            document.querySelectorAll('.game-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
+            document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('selected'));
         }
     </script>
-
-
+</body>
+</html>
