@@ -1024,7 +1024,7 @@
             if (event.target.classList.contains('modal')) closeModal(modalId);
         }
 
-        // ===== BANQUE DE QUESTIONS (15+ par jeu) =====
+        // ===== BANQUE DE QUESTIONS =====
         const allQuestions = {
             fortnite: [
                 { question: "Quel est l'objectif principal dans Fortnite Battle Royale ?", answers: ["Construire des bases", "Faire une Victory Royale", "Farmer des ressources", "Danser"], correct: 1 },
@@ -1060,7 +1060,7 @@
                 { question: "Quel studio a développé Valorant ?", answers: ["Blizzard", "Riot Games", "Bungie", "Epic Games"], correct: 1 },
                 { question: "Comment s'appelle la capacité ultime d'un agent ?", answers: ["Super", "Ult", "Ultimate", "Final Move"], correct: 2 },
                 { question: "Quelle map est considérée comme la plus iconique ?", answers: ["Bind", "Haven", "Ascent", "Split"], correct: 2 },
-                { question: "Combien de temps dure un round en attaque/défense ?", answers: ["1 min 30", "1 min 45", "2 min", "2 min 30"], correct: 1 }
+                { question: "Combien de temps dure un round en attaque/défense ?", answers: ["1 min 30", "1 min 45", "2 min", "2 min 30"], correct: 0 }
             ],
             minecraft: [
                 { question: "Quel minerai est le plus rare dans Minecraft vanilla ?", answers: ["Diamant", "Émeraude", "Or", "Netherite"], correct: 3 },
@@ -1102,10 +1102,8 @@
 
         const QUESTIONS_PER_QUIZ = 5;
 
-        // Fonction pour mélanger et piocher N questions au hasard
         function getRandomQuestions(game, n) {
             const pool = [...allQuestions[game]];
-            // Fisher-Yates shuffle
             for (let i = pool.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -1132,7 +1130,6 @@
                 score = 0;
                 document.getElementById('score').textContent = '0';
 
-                // Piocher des questions aléatoires
                 currentQuizQuestions = getRandomQuestions(game, QUESTIONS_PER_QUIZ);
 
                 buildQuestionCounter();
@@ -1234,7 +1231,6 @@
             currentQuestion = 0;
             score = 0;
             document.getElementById('score').textContent = '0';
-            // Nouvelles questions aléatoires !
             currentQuizQuestions = getRandomQuestions(selectedGame, QUESTIONS_PER_QUIZ);
             buildQuestionCounter();
             loadQuestion();
